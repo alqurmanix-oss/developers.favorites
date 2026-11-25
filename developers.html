@@ -13,23 +13,27 @@ main{max-width:900px;margin:30px auto;padding:0 18px}.hero,.panel{background:#ff
 <section class="hero"><div class="eyebrow">AQX FAVORITES · GUEST WEBSITE EMBED</div><h1>أضف المفضلة إلى موقعك</h1><p>كودان منفصلان: زر يحفظ الصفحة في مكتبة Guest الحالية، وأيقونة عائمة تعرض آخر خمسة محفوظات داخل صفحة موقعك نفسها.</p>
 <div class="notice">يعمل التكامل داخل إطار AQX مضمّن في الصفحة، ولا يفتح نافذة متصفح أو يحوّل الزائر إلى موقع آخر. يحتفظ رمز جلسة Guest داخل نطاق AQX ولا يُرسل إلى الموقع المضيف. قد يطلب المتصفح إذن الوصول إلى تخزين AQX عند أول استخدام؛ إذا منع المتصفح هذا الوصول فلن ينشئ التكامل مكتبة بديلة.</div></section>
 <section class="panel"><h2>1. كود زر حفظ الصفحة</h2><p>ضع الكود في موضع الزر داخل الصفحة. الزر يحفظ رابط الصفحة وعنوانها، ويعرض حركة قلب فقط بعد نجاح الحفظ أو إذا كان الرابط محفوظًا مسبقًا.</p>
-<div class="codebox"><button class="copy" data-copy="save">نسخ الكود</button><pre id="save">&lt;iframe
-  title="AQX Favorites Save"
-  allow="storage-access" allow-storage-access-by-user-activation
-  referrerpolicy="no-referrer"
-  style="width:170px;height:56px;border:0;vertical-align:middle;overflow:hidden"
-  src="https://favorites.alqurmanix.com/guest/embed.html?mode=save&amp;url=PAGE_URL&amp;title=PAGE_TITLE"&gt;
-&lt;/iframe&gt;
-
-&lt;script&gt;
-// استبدل PAGE_URL وPAGE_TITLE بقيم الصفحة الحالية:
-const aqxSaveFrame = document.currentScript.previousElementSibling;
-const aqxSaveUrl = new URL(aqxSaveFrame.src);
-aqxSaveUrl.searchParams.set('url', location.href);
-aqxSaveUrl.searchParams.set('title', document.title || location.hostname);
-aqxSaveFrame.src = aqxSaveUrl.toString();
+<div class="codebox"><button class="copy" data-copy="save">نسخ الكود</button><pre id="save">&lt;script&gt;
+(() =&gt; {
+  const frame = document.createElement('iframe');
+  const url = new URL('https://favorites.alqurmanix.com/guest/embed.html');
+  url.searchParams.set('mode', 'save');
+  url.searchParams.set('url', window.location.href);
+  url.searchParams.set('title', document.title || window.location.hostname);
+  frame.title = 'AQX Favorites Save';
+  frame.allow = 'storage-access';
+  frame.setAttribute('allow', 'storage-access');
+  frame.setAttribute('allow-storage-access-by-user-activation', '');
+  frame.referrerPolicy = 'no-referrer';
+  frame.src = url.toString();
+  Object.assign(frame.style, {
+    width: '170px', height: '56px', border: '0',
+    verticalAlign: 'middle', overflow: 'hidden'
+  });
+  document.currentScript.parentNode.insertBefore(frame, document.currentScript);
+})();
 &lt;/script&gt;</pre></div>
-<p class="hint">أبقِ عنصر iframe والسكريبت معًا، أو أنشئ رابط iframe ديناميكيًا من عنوان الصفحة الحالية.</p></section>
+<p class="hint">انسخ الكود كما هو والصقه في موضع ظهور زر الحفظ؛ يُنشئ الإطار ويقرأ رابط الصفحة وعنوانها تلقائيًا دون استبدال أي قيم.</p></section>
 <section class="panel"><h2>2. كود أيقونة المحفوظات العائمة</h2><p>أيقونة على يسار الصفحة. عند الضغط تفتح لوحة صغيرة داخل الموقع المضيف تعرض أحدث خمسة عناصر فعلية من مكتبة Guest نفسها، مع رابط لفتح المكتبة الكاملة.</p>
 <div class="codebox"><button class="copy" data-copy="recent">نسخ الكود</button><pre id="recent">&lt;script&gt;
 (() =&gt; {
