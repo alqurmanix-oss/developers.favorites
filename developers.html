@@ -42,6 +42,8 @@ main{max-width:900px;margin:30px auto;padding:0 18px}.hero,.panel{background:#ff
   frame.id = 'aqx-favorites-recent-frame';
   frame.title = 'AQX Favorites Recent Items';
   frame.allow = 'storage-access';
+  frame.setAttribute('allow', 'storage-access');
+  frame.setAttribute('allow-storage-access-by-user-activation', '');
   frame.referrerPolicy = 'no-referrer';
   Object.assign(frame.style, {
     position: 'fixed', left: '12px', top: '50%',
@@ -61,7 +63,9 @@ main{max-width:900px;margin:30px auto;padding:0 18px}.hero,.panel{background:#ff
       frame.style.height = '58px';
     }
   });
-  document.body.appendChild(frame);
+  const mount = () => (document.body || document.documentElement).appendChild(frame);
+  if (document.body) mount();
+  else document.addEventListener('DOMContentLoaded', mount, { once: true });
 })();
 &lt;/script&gt;</pre></div>
 <p class="hint">اللوحة تظهر داخل إطار مضمّن في الصفحة المضيفة؛ لا تُفتح نافذة متصفح منبثقة ولا يحدث تحويل للزائر.</p></section>
