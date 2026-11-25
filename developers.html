@@ -11,7 +11,7 @@ main{max-width:900px;margin:30px auto;padding:0 18px}.hero,.panel{background:#ff
 <header><div><div class="brand">AQX Favorites</div><div class="sub">تكامل المفضلة للمواقع — Guest</div></div><a href="https://favorites.alqurmanix.com/guest/">مكتبة المفضلة ↗</a></header>
 <main>
 <section class="hero"><div class="eyebrow">AQX FAVORITES · GUEST WEBSITE EMBED</div><h1>أضف المفضلة إلى موقعك</h1><p>كودان منفصلان: زر يحفظ الصفحة في مكتبة Guest الحالية، وأيقونة عائمة تعرض آخر خمسة محفوظات داخل صفحة موقعك نفسها.</p>
-<div class="notice">يعمل التكامل داخل إطار AQX مضمّن في الصفحة، ولا يفتح نافذة متصفح أو يحوّل الزائر إلى موقع آخر. يحتفظ رمز جلسة Guest داخل نطاق AQX ولا يُرسل إلى الموقع المضيف. قد يطلب المتصفح إذن الوصول إلى تخزين AQX عند أول استخدام؛ إذا منع المتصفح هذا الوصول فلن ينشئ التكامل مكتبة بديلة.</div></section>
+<div class="notice">يعمل التكامل داخل إطار AQX مضمّن في الصفحة، ولا يفتح نافذة متصفح أو يحوّل الزائر إلى موقع آخر. يحتفظ رمز جلسة Guest داخل نطاق AQX ولا يُرسل إلى الموقع المضيف. لا يطلب التكامل إذنًا منبثقًا. يقرأ جلسة Guest الموجودة بالفعل على نطاق AQX نفسه، ولا ينشئ مكتبة بديلة.</div></section>
 <section class="panel"><h2>1. كود زر حفظ الصفحة</h2><p>ضع الكود في موضع الزر داخل الصفحة. الزر يحفظ رابط الصفحة وعنوانها، ويعرض حركة قلب فقط بعد نجاح الحفظ أو إذا كان الرابط محفوظًا مسبقًا.</p>
 <div class="codebox"><button class="copy" data-copy="save">نسخ الكود</button><pre id="save">&lt;script&gt;
 (() =&gt; {
@@ -21,9 +21,6 @@ main{max-width:900px;margin:30px auto;padding:0 18px}.hero,.panel{background:#ff
   url.searchParams.set('url', window.location.href);
   url.searchParams.set('title', document.title || window.location.hostname);
   frame.title = 'AQX Favorites Save';
-  frame.allow = 'storage-access';
-  frame.setAttribute('allow', 'storage-access');
-  frame.setAttribute('allow-storage-access-by-user-activation', '');
   frame.referrerPolicy = 'no-referrer';
   frame.src = url.toString();
   Object.assign(frame.style, {
@@ -41,9 +38,6 @@ main{max-width:900px;margin:30px auto;padding:0 18px}.hero,.panel{background:#ff
   const frame = document.createElement('iframe');
   frame.id = 'aqx-favorites-recent-frame';
   frame.title = 'AQX Favorites Recent Items';
-  frame.allow = 'storage-access';
-  frame.setAttribute('allow', 'storage-access');
-  frame.setAttribute('allow-storage-access-by-user-activation', '');
   frame.referrerPolicy = 'no-referrer';
   Object.assign(frame.style, {
     position: 'fixed', left: '12px', top: '50%',
