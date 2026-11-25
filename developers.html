@@ -27,26 +27,34 @@ footer{text-align:center;color:#a09bad;font-size:11px;padding:28px}
 <section class="hero">
 <div class="eyebrow">AQX FAVORITES · WEBSITE INTEGRATION</div>
 <h1>أضف المفضلة إلى موقعك</h1>
-<p>امنح زوار موقعك وصولًا مباشرًا إلى AQX Favorites، ليتمكنوا من فتح مساحة المفضلة الخاصة بهم والرجوع إلى ما يحفظونه بسهولة.</p>
+<p>امنح زوار موقعك زرًا يحفظ الصفحة الحالية مباشرة في مكتبة AQX Favorites الخاصة بالزائر، مع إرسال رابط الصفحة وعنوانها تلقائيًا.</p>
 <div class="hero-actions"><a class="btn primary" href="#embed">الحصول على كود التضمين</a><a class="btn secondary" href="#guide">دليل التركيب</a></div>
 </section>
 <section class="panel" id="embed">
 <h2>كود التضمين</h2>
 <p>انسخ الكود التالي وضعه في المكان الذي تريد ظهور زر AQX Favorites فيه داخل موقعك.</p>
-<div class="codebox"><button class="copy" id="copyCode" type="button">نسخ الكود</button><pre id="embedCode">&lt;a href="https://favorites.alqurmanix.com/guest/"
-   target="_blank" rel="noopener noreferrer"
-   aria-label="افتح AQX Favorites"&gt;
-  ♥ أضف إلى مفضلتك
-&lt;/a&gt;</pre></div>
-<p class="hint">هذا الزر يفتح خدمة AQX Favorites في نافذة جديدة. لا يرسل رابط الصفحة الحالية تلقائيًا إلى مكتبة الزائر؛ وظيفة الحفظ المباشر داخل موقعك تتطلب تكاملًا تقنيًا مخصصًا لم يُفعّل بعد.</p>
+<div class="codebox"><button class="copy" id="copyCode" type="button">نسخ الكود</button><pre id="embedCode">&lt;button type="button" id="aqx-favorites-save"&gt;♥ احفظ الصفحة&lt;/button&gt;
+&lt;script&gt;
+(function () {
+  var button = document.getElementById('aqx-favorites-save');
+  if (!button) return;
+  button.addEventListener('click', function () {
+    var target = new URL('https://favorites.alqurmanix.com/guest/');
+    target.searchParams.set('url', window.location.href);
+    target.searchParams.set('title', document.title || window.location.hostname);
+    window.open(target.toString(), '_blank', 'noopener,noreferrer');
+  });
+})();
+&lt;/script&gt;</pre></div>
+<p class="hint">عند الضغط على الزر، تُفتح AQX Favorites في نافذة جديدة مع تمرير رابط الصفحة الحالية وعنوانها؛ وتلتقط صفحة المفضلة البيانات وتحفظها تلقائيًا في مكتبة الزائر.</p>
 </section>
 <section class="panel" id="guide">
 <h2>دليل المطور</h2>
-<p>خطوات إضافة زر الوصول إلى AQX Favorites إلى صفحات موقعك.</p>
+<p>خطوات إضافة زر «احفظ الصفحة» إلى صفحات موقعك.</p>
 <div class="steps">
 <div class="step"><div class="num">1</div><strong>انسخ الكود</strong><p>اضغط «نسخ الكود» للحصول على كود HTML الجاهز.</p></div>
-<div class="step"><div class="num">2</div><strong>أضفه إلى موقعك</strong><p>الصق الكود في موضع مناسب داخل قالب الصفحة أو محرر الموقع.</p></div>
-<div class="step"><div class="num">3</div><strong>اختبر الزر</strong><p>افتح الصفحة المنشورة واضغط الزر للتأكد من انتقال الزائر إلى AQX Favorites.</p></div>
+<div class="step"><div class="num">2</div><strong>أضفه إلى موقعك</strong><p>الصق الكود في موضع مناسب داخل قالب الصفحة أو محرر الموقع، مع إبقاء عنصر الزر والسكريبت معًا.</p></div>
+<div class="step"><div class="num">3</div><strong>اختبر الحفظ</strong><p>افتح صفحة من موقعك واضغط الزر؛ ستُفتح AQX Favorites ويُضاف رابط الصفحة الحالية إلى مكتبة الزائر.</p></div>
 </div>
 <p class="hint">المتطلبات: صفحة تدعم HTML وروابط HTTPS. لا يحتاج هذا الزر إلى مكتبات JavaScript أو مفاتيح API.</p>
 <div class="more-card">
